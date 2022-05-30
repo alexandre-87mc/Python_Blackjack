@@ -38,7 +38,7 @@ class dealer(object):
         self.money = money
         self.points = points
         self.cards = cards
-        print('%s created! \nMoney: $%.02f \n' %(self.name, self.money, self.points))
+        print('%s created! \nMoney: $%.02f \nPoints: %r\n' %(self.name, self.money, self.points))
 
 #Calculate money function - returns values and result of game
 def Calculate_money(mp, md, mp_bet, winp):
@@ -70,14 +70,14 @@ def Print_game_info(list_mpd, pname, pcards, ppoints):
 
     if mpd == 1:
         print('\nGame over! The Dealer is out!\n')                  #prints game results when game over and player wins
-        print(pname + "'s money: %r\n" mp)
-        print("Dealer's money: %r\n" md)
-        print(pname + "'s cards: %r\n" mp)
+        print(pname + "'s money: %r\n", mp)
+        print("Dealer's money: %r\n", md)
+        print(pname + "'s cards: %r\n", mp)
         option_game = 'n'
     elif mpd == 0:
         print('\nThe game continues!\n')                            #prints game results when game continues
-        print("Dealer's money: %r\n" md)
-        print(pname + "'s money: %r\n" mp)
+        print("Dealer's money: %r\n", md)
+        print(pname + "'s money: %r\n", mp)
         print(pname + "'s cards: " + pcards + '\n')
         option_game = input('Do you want 1 more card? (y/n)')
         while option_game != 'y' or option_game != 'Y':
@@ -85,21 +85,91 @@ def Print_game_info(list_mpd, pname, pcards, ppoints):
             option_game = input('Do you want 1 more card? (s/n)')
     elif mpd == 3:
         print('\nGame over! You lose!\n')                           #prints game results when game over and player loses
-        print(pname + "'s money: %r\n" mp)
-        print("Dealer's money: %r\n" md)
-        print(pname + "'s cards: %r\n" mp)
-        print(pname + "'s points: %r\n" ppoints)
+        print(pname + "'s money: %r\n", mp)
+        print("Dealer's money: %r\n", md)
+        print(pname + "'s cards: %r\n", mp)
+        print(pname + "'s points: %r\n", ppoints)
         option_game = 'n'
     return option_game
+  
+#Create matrix deck
+def Create_deck():
+    spades = [] 
+    diamonds = []  
+    clubs = [] 
+    hearts = []
+    #Create spade suit
+    spades.extend(range(1,11))
+    spades.append(10)
+    spades.append(10)
+    spades.append(10)
+    spades.append(11)
+    #Create diamond suit
+    diamonds.extend(range(1,11))
+    diamonds.append(10)
+    diamonds.append(10)
+    diamonds.append(10)
+    diamonds.append(11)
+    #Create clubs suit
+    clubs.extend(range(1,11))
+    clubs.append(10)
+    clubs.append(10)
+    clubs.append(10)
+    clubs.append(11)
+    #Create heart suit
+    hearts.extend(range(1,11))
+    hearts.append(10)
+    hearts.append(10)
+    hearts.append(10)
+    hearts.append(11)
+    #Create full deck
+    Deck = [spades, diamonds, clubs, hearts]
+    return Deck
 
-    
-#insert cards points calculation
+#lmoney = Calculate_money(John_p1.money, Dealer_d1.money, 30, 1)
+#print(lmoney)
+
+def main_Black_Jack():
+    #Declare and initialize 
+    cards_p1 = []
+    cards_d = []
+    game_end = 0
+
+    #Creates deck, player and dealer
+    deck = Create_deck()
+    p1 = player('John', 100, 0, cards_p1)
+    d1 = dealer(1000, 0, cards_d)
+    #Welcome
+    print('\nWelcome to Black Jack!\n')
+
+    #Game loop
+    while(game_end ! 1):
+
+        #Declare and initialize variables
+        omc = ''
+
+        #info and instructions
+        print("%s you have R$%.02f and %r points.\n" %(p1.name, p1.money, p1.points))
+        print("Your cards are: " + p1.cards) 
+        print("%s you have R$%.02f and %r points.\n" %(d1.name, d1.money, d1.points))
+        print("Your cards are: " + d1.cards)
+
+        #Input for ask "one more card" --> omc
+        while(omc != 's' or omc != 'S' or omc != 'n' or omc != 'N'):
+            omc = input('\n\n%s do you want one more card(s/n): \n' %(p1.name))
+            if(omc != 's' and omc != 'S' and omc != 'n' and omc != 'N'):
+                print("Por favor responda com 's' ou 'n'")
+        
+        #Input value for game_end
+        if(omc = 's' or omc = 'S'):
+            print('The game continues!')
+        elif(omc = 'n' or omc = 'N'):
+            while(d1.points <= 17):
+                print("%s do you want one more card? " %(d1.name))
+                print("Yes please.")
+                # ************* FUNCAO PUXA CARTA PARA DEALER
 
 
-#Functions and classes tests
-cards_p1 = []
-cards_d = []
-John_p1 = player('John', 100, 0, cards_p1)
-Dealer_d1 = dealer(25, 0, cards_d)
-lmoney = Calculate_money(John_p1.money, Dealer_d1.money, 30, 1)
-print(lmoney)
+        \n
+
+main_Black_Jack()
